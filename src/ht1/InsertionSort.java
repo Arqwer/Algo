@@ -10,6 +10,7 @@ import java.util.Random;
 public class InsertionSort {
   public static final int M_SIZE = 10, MAX_RAND = 10;
   public static long[] mass = new long[M_SIZE];
+  public static long[] mass2 = new long[M_SIZE];
 
   public static void straitIns(long[] m, int sorted) {
     long last;
@@ -70,7 +71,12 @@ public class InsertionSort {
     for (int i = 0; i < M_SIZE; i++) {
       mass[i] = random.nextInt(MAX_RAND + 1);
     }
-    insertionBinSort(mass);
+    mass2 = mass.clone();
     System.out.println(Arrays.toString(mass));
+    insertionBinSort(mass);
+    insertionSort(mass2);
+    System.out.println(Arrays.toString(mass));
+    if (mass.equals(mass2)) System.out.println("True!");
+    else System.out.println("False:\n" + Arrays.toString(mass) + "\n" + Arrays.toString(mass2));
   }
 }
