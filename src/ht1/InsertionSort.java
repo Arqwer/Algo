@@ -34,7 +34,7 @@ public class InsertionSort {
 
   public static void mShift(long[] m, int from, int to) {
 
-    for (int i = to - 1; i >= from; i--) {
+    for (int i = to - 1; i > from; i--) {
       m[i + 1] = m[i];
     }
   }
@@ -70,7 +70,7 @@ public class InsertionSort {
     for (int i = 0; i < M_SIZE; i++) {
       mass[i] = random.nextInt(MAX_RAND + 1);
     }
-    insertionSort(mass);
+    insertionBinSort(mass);
     System.out.println(Arrays.toString(mass));
   }
 }
