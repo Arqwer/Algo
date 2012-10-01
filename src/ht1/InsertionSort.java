@@ -24,8 +24,7 @@ public class InsertionSort {
 
   public static void straitBinIns(long[] m, int sorted) {
     int k;
-    long last;
-    last = m[sorted + 1];
+    long last = m[sorted + 1];
     if (last < m[sorted]) {
       k = binSearch(m, m[sorted + 1], 0, sorted);
       mShift(m, k, sorted + 1);
@@ -41,8 +40,8 @@ public class InsertionSort {
   }
 
   public static int binSearch(long[] m, long val, int from, int to) {
-    int mid;
-    for (mid = (from + to) / 2; to - from > 1; ) {
+    int mid = (from + to) / 2;
+    for (; to - from > 1; ) {
       mid = (from + to) / 2;
       if (m[mid] < val) {
         from = mid;
