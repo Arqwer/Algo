@@ -23,30 +23,24 @@ public class InsertionSort {
   }
 
   public static void straitBinIns(long[] m, int sorted) {
-    // System.out.println("SBI entered");                 //mbd
-    System.out.println("   m:" + Arrays.toString(m) + "s:" + sorted);
     int k;
     long last;
     last = m[sorted + 1];
     if (last < m[sorted]) {
       k = binSearch(m, m[sorted + 1], 0, sorted);
-      mShift(m, k);
+      mShift(m, k, sorted + 1);
       m[k] = last;
     }
-    //  System.out.println("SBI closed");    //mbd
   }
 
-  public static void mShift(long[] m, int from) {
+  public static void mShift(long[] m, int from, int to) {
 
-    for (int i = m.length - 2; i >= from; i--) {
+    for (int i = to - 1; i >= from; i--) {
       m[i + 1] = m[i];
-      System.out.println(Arrays.toString(m));
     }
   }
 
   public static int binSearch(long[] m, long val, int from, int to) {
-    /*  System.out.println("BS entered");                 //mbd
-System.out.println("   m:" + Arrays.toString(m)+"\nv:"+val+"f:"+from+"t:"+to); */
     int mid;
     for (mid = (from + to) / 2; to - from > 1; ) {
       mid = (from + to) / 2;
@@ -57,7 +51,6 @@ System.out.println("   m:" + Arrays.toString(m)+"\nv:"+val+"f:"+from+"t:"+to); *
         break;
       }
     }
-    //System.out.println("BS closed");
     return mid;
   }
 
@@ -78,11 +71,7 @@ System.out.println("   m:" + Arrays.toString(m)+"\nv:"+val+"f:"+from+"t:"+to); *
     for (int i = 0; i < M_SIZE; i++) {
       mass[i] = random.nextInt(MAX_RAND + 1);
     }
-    //insertionSort(mass);
-    // System.out.println("k" + binSearch(mass, 6, 0, 9));
-    insertionBinSort(mass);
+    insertionSort(mass);
     System.out.println(Arrays.toString(mass));
-    //mShift(mass, 3);
-    //System.out.println(Arrays.toString(mass));
   }
 }
