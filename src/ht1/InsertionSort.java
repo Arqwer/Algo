@@ -1,6 +1,7 @@
 package ht1;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * User: Roman
@@ -21,12 +22,18 @@ public class InsertionSort {
     }
   }
 
-  public static void main(String[] args) {
-    for (int i = 0; i < 10; i++) {
-      mass[i] = i;
+  public static void insertionSort(long[] m) {
+    for (int i = 0; i < M_SIZE; i++) {
+      straitIns(m, i);
     }
-    mass[10] = 0;
-    straitIns(mass, 9);
+  }
+
+  public static void main(String[] args) {
+    Random random = new Random();
+    for (int i = 0; i < M_SIZE; i++) {
+      mass[i] = random.nextInt();
+    }
+    insertionSort(mass);
     System.out.println(Arrays.toString(mass));
   }
 }
