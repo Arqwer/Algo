@@ -7,6 +7,7 @@ import java.util.Random;
  * User: Roman
  * Date: 01.10.12
  */
+
 public class InsertionSort {
   public static final int M_SIZE = 10, MAX_RAND = 10;
   public static long[] arr = new long[M_SIZE];
