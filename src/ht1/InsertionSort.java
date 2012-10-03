@@ -25,12 +25,12 @@ public class InsertionSort {
   }
 
   public static void straitBinIns(long[] m, int sorted) {
-    int k;
+    int key;
     long last = m[sorted + 1];
     if (last < m[sorted]) {
-      k = binSearch(m, m[sorted + 1], 0, sorted);
-      mShift(m, k, sorted + 1);
-      m[k] = last;
+      key = binSearch(m, m[sorted + 1], 0, sorted);
+      mShift(m, key, sorted + 1);
+      m[key] = last;
     }
   }
 
@@ -77,7 +77,7 @@ public class InsertionSort {
     insertionBinSort(arr);
     insertionSort(arr2);
     System.out.println(Arrays.toString(arr));
-    if (arr.equals(arr2)) System.out.println("True!");
-    else System.out.println("False:\n" + Arrays.toString(arr) + "\n" + Arrays.toString(arr2));
+    if (arr.equals(arr2)) System.out.println("Right!");
+    else System.out.println("Wrong:\n" + Arrays.toString(arr) + "\n" + Arrays.toString(arr2));
   }
 }
