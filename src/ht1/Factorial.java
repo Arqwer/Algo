@@ -37,6 +37,6 @@ public class Factorial {
     factorial = factorialRec(N);
     time = System.nanoTime() - startTime;
     System.out.println(factorial);
-    System.out.println(time);
+    System.out.println("Time: " + time + " ns");
   }
 }
