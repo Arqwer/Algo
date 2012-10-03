@@ -56,7 +56,7 @@ public class InsertionSort {
   }
 
   public static void insertionSort(long[] m) {
-    for (int i = 0; i < M_SIZE - 1; i++) {
+    for (int i = 0; i < m.length - 1; i++) {
       straitIns(m, i);
     }
   }
@@ -69,7 +69,7 @@ public class InsertionSort {
 
   public static void main(String[] args) {
     Random random = new Random();
-    for (int i = 0; i < M_SIZE; i++) {
+    for (int i = 0; i < arr.length; i++) {
       arr[i] = random.nextInt(MAX_RAND + 1);
     }
     arr2 = arr.clone();
