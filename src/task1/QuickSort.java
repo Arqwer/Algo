@@ -12,6 +12,7 @@ public class QuickSort {
 
   public static final int M_SIZE = 100;
   public static final int MAX_RAND = 200;
+  public static final int MIN_QUICK = 4;
 
   public static void insertionSort(long[] m, int low, int high) {
     if (low < high) {
@@ -29,7 +30,7 @@ public class QuickSort {
   }
 
   public static void quickSort(long[] arr, int low, int high) {
-    if (high - low > 4) {
+    if (high - low > MIN_QUICK) {
       int i = low;
       int j = high;
       long bar = arr[low];
