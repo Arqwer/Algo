@@ -10,8 +10,8 @@ import java.util.Random;
 
 public class QuickSort {
 
-  public static final int M_SIZE = 10;
-  public static final int MAX_RAND = 20;
+  public static final int M_SIZE = 100;
+  public static final int MAX_RAND = 200;
 
   public static void insertionSort(long[] m, int low, int high) {
     if (low < high) {
@@ -53,6 +53,10 @@ public class QuickSort {
     } else insertionSort(arr, low, high);
   }
 
+  public static void quickSort(long[] arr) {
+    quickSort(arr, 0, arr.length - 1);
+  }
+
 
   public static void main(String[] args) {
     long[] arr = new long[M_SIZE];
@@ -61,7 +65,7 @@ public class QuickSort {
       arr[i] = random.nextInt(MAX_RAND + 1);
     }
     System.out.println("In: " + Arrays.toString(arr));
-    quickSort(arr, 0, arr.length - 1);
+    quickSort(arr);
     System.out.println("Out:" + Arrays.toString(arr));
   }
 }
