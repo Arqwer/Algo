@@ -9,10 +9,10 @@ import java.util.Random;
 
 public class QuickSort {
 
-  public static final int M_SIZE = 100;
-  public static final int MAX_RAND = 100;
+  public static final int M_SIZE = 900;
+  public static final int MAX_RAND = M_SIZE;
   public static final int MIN_QUICK = 4;
-  public static final int N_TESTS = 199999;
+  public static final int N_TESTS = 2000;
 
   public static void insertionSort(long[] m, int low, int high) {
     if (low < high) {
@@ -158,7 +158,7 @@ public class QuickSort {
       time = System.nanoTime();
       avTime3 += ((time - startTime) - avTime3) / i;
     }
-    System.out.println("case 1: " + avTime + "\ncase 2: " + avTime2 + "\nrandom: " + avTime3);
+    System.out.println("case 1: " + avTime / 100 + "\ncase 2: " + avTime2 / 100 + "\nrandom: " + avTime3 / 100);
 
     /*
  avTime=0;
