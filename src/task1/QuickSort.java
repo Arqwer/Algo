@@ -1,5 +1,6 @@
 package task1;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -120,6 +121,12 @@ public class QuickSort {
     return arr;
   }
 
+  public static void worstCaseSorter(long[] arr) {
+    quickSort(arr);
+    for (int i = 0; i + arr.length / 2 < arr.length - 1; i++) {
+      swap(arr, i, i + arr.length / 2);
+    }
+  }
 
   public static void main(String[] args) {
     long[] arr = new long[M_SIZE];
@@ -129,7 +136,12 @@ public class QuickSort {
     } */
     long startTime, time, avTime, avTime2, avTime3;
     avTime = 0;
-
+    arr = worstCase(M_SIZE);
+    System.out.println(Arrays.toString(arr));
+    quickSort(arr);
+    worstCaseSorter(arr);
+    System.out.println(Arrays.toString(arr));
+    /*   */
     for (int i = 1; i < N_TESTS; i++) {   //разогрев
       arr = worstCase(M_SIZE);
       startTime = System.nanoTime();
@@ -141,58 +153,28 @@ public class QuickSort {
     avTime = 0;
     avTime2 = 0;
     avTime3 = 0;
-    for (int i = 1; i < N_TESTS; i++) {
-      arr = worstCase(M_SIZE);
-      startTime = System.nanoTime();
-      trueQuickSort(arr);
-      time = System.nanoTime();
-      avTime += ((time - startTime) - avTime) / i;
-      arr = worstCase2(M_SIZE);
-      startTime = System.nanoTime();
-      trueQuickSort(arr);
-      time = System.nanoTime();
-      avTime2 += ((time - startTime) - avTime2) / i;
-      arr = randCase(M_SIZE);
-      startTime = System.nanoTime();
-      trueQuickSort(arr);
-      time = System.nanoTime();
-      avTime3 += ((time - startTime) - avTime3) / i;
+    for (int j = 10; j < M_SIZE - 10; j += 10) {
+      for (int i = 1; i < N_TESTS; i++) {
+        arr = worstCase(j);
+        startTime = System.nanoTime();
+        trueQuickSort(arr, 0, j - 1);
+        time = System.nanoTime();
+        avTime += ((time - startTime) - avTime) / i;
+        arr = worstCase2(j);
+        startTime = System.nanoTime();
+        trueQuickSort(arr, 0, j - 1);
+        time = System.nanoTime();
+        avTime2 += ((time - startTime) - avTime2) / i;
+        arr = randCase(j);
+        startTime = System.nanoTime();
+        trueQuickSort(arr, 0, j - 1);
+        time = System.nanoTime();
+        avTime3 += ((time - startTime) - avTime3) / i;
+      }
+      System.out.println(j + " " + avTime + " " + avTime2 + " " + avTime3);
     }
     System.out.println("case 1: " + avTime / 100 + "\ncase 2: " + avTime2 / 100 + "\nrandom: " + avTime3 / 100);
 
-    /*
- avTime=0;
- arr = worstCase(M_SIZE);
- System.out.println("In: " + Arrays.toString(arr));
- for (int i = 1; i < N_TESTS; i++) {
-   arr = worstCase(M_SIZE);
-   startTime = System.nanoTime();
-   trueQuickSort(arr);
-   time=System.nanoTime();
-   avTime+=((time-startTime)-avTime)/i;
- }
- System.out.println("Out:" + Arrays.toString(arr)+"\nTime:"+avTime);
- avTime = 0;
- arr = worstCase2(M_SIZE);
- System.out.println("In: " + Arrays.toString(arr));
- for (int i = 1; i < N_TESTS; i++) {
-   arr = worstCase2(M_SIZE);
-   startTime = System.nanoTime();
-   trueQuickSort(arr);
-   time=System.nanoTime();
-   avTime+=((time-startTime)-avTime)/i;
- }
- System.out.println("Out:" + Arrays.toString(arr)+"\nTime:"+avTime);
- avTime = 0;
- arr = randCase(M_SIZE);
- System.out.println("In: " + Arrays.toString(arr));
- for (int i = 1; i < N_TESTS; i++) {
-   arr = randCase(M_SIZE);
-   startTime = System.nanoTime();
-   trueQuickSort(arr);
-   time=System.nanoTime();
-   avTime+=((time-startTime)-avTime)/i;
- }
- System.out.println("Out:" + Arrays.toString(arr)+"\nTime:"+avTime); */
+    /**/
   }
 }
