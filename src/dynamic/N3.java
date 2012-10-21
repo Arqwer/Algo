@@ -11,11 +11,13 @@ import java.util.Locale;
 
 public class N3 {
   private static void solve() throws IOException {
-
+    int n = rInt();
+    int m = rInt();
+    out.println(ways(n, m));
   }
 
-  private static final int N_MAX = 30;
-  private static final int M_MAX = 30;
+  private static final int N_MAX = 45;
+  private static final int M_MAX = 45;
   public static long[][] waysArr = new long[N_MAX][M_MAX];
 
   public static long ways(int n, int m) {
@@ -33,7 +35,7 @@ public class N3 {
 
     BufferedReader br;
     try {
-      final String fileName = "";
+      final String fileName = "dyn3";
       br = new BufferedReader(new FileReader(fileName + ".in"));
       out = new PrintWriter(new FileWriter(fileName + ".out"));
     } catch (Exception e) {
