@@ -3,6 +3,7 @@ package graph;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Stack;
 
 /**
  * User: Roman
@@ -26,6 +27,26 @@ public class DFS {
     marked[start] = 2;
   }
 
+  public static void stack_dfs() {
+    Stack stack = new Stack();
+    int start = 0;
+    marked[start] = 1;
+    do {
+      for (int i = 0; i < NODES; i++) {
+        if ((graph[start][i] != 0) && (marked[i] == 0)) {
+          stack.push(i);
+          marked[i] = 1;
+          start = i;
+          i = 0;
+        }
+
+      }
+      marked[start] = 2;
+      start = (Integer) stack.pop();
+    } while (!stack.empty());
+
+  }
+
 
   public static void bfs() {
 
@@ -33,7 +54,7 @@ public class DFS {
 
   private static void solve() throws IOException {
     System.out.println(Arrays.toString(marked));
-    dfs(0);
+    stack_dfs();
     System.out.println(Arrays.toString(marked));
   }
 
