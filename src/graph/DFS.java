@@ -1,9 +1,7 @@
 package graph;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * User: Roman
@@ -47,14 +45,30 @@ public class DFS {
 
   }
 
-
   public static void bfs() {
+    Queue queue = new LinkedList();
+    int start = 0;
+    marked[start] = 1;
+    do {
+      for (int i = 0; i < NODES; i++) {
+        if ((graph[start][i] != 0) && (marked[i] == 0)) {
+          queue.offer(i);
+          marked[i] = 1;
+          start = i;
+          i = 0;
+        }
+
+      }
+      marked[start] = 2;
+      start = (Integer) queue.poll();
+    } while (queue.peek() != null);
 
   }
 
+
   private static void solve() throws IOException {
     System.out.println(Arrays.toString(marked));
-    stack_dfs();
+    bfs();
     System.out.println(Arrays.toString(marked));
   }
 
