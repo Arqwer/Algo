@@ -11,7 +11,7 @@ import java.util.*;
 public class DFS {
 
 
-  static long[][] graph = {{0, 0, 3, 0, 8}, {0, 0, 5, 0, 1}, {3, 5, 0, 0, 6}, {0, 0, 0, 0, 0}, {8, 1, 6, 0, 0}};
+  static long[][] graph = {{0, 0, 3, 0, 8}, {0, 0, 0, 4, 0}, {3, 0, 0, 0, 6}, {0, 4, 0, 0, 0}, {8, 0, 6, 0, 0}};
   public static long[] marked = {0, 0, 0, 0, 0};  //0 - never visited, 1 - visited, 2 - everything is discovered nearby.
   private static final int NODES = 5;
 
@@ -65,11 +65,34 @@ public class DFS {
 
   }
 
+  private static int unmarked() {
+    for (int i = 0; i < NODES; i++) {
+      if (marked[i] == 0) return i;
+    }
+    return -1;
+  }
+
+  private static void unmark() {
+    for (int i = 0; i < NODES; i++) {
+      marked[i] = 0;
+    }
+  }
+
+  public static int n_connected() {
+    int counter = 0;
+    unmark();
+    while (unmarked() != -1) {
+      dfs(unmarked());
+      counter++;
+    }
+    return counter;
+  }
 
   private static void solve() throws IOException {
     System.out.println(Arrays.toString(marked));
     bfs();
     System.out.println(Arrays.toString(marked));
+    System.out.println(n_connected());
   }
 
   public static void main(String[] args) throws IOException {
