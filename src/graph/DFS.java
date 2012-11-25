@@ -1,6 +1,7 @@
 package graph;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Stack;
@@ -13,11 +14,27 @@ import java.util.Stack;
 public class DFS {
 
 
+  public static final long INF = Long.MAX_VALUE;
+
+  static class Edge {
+    int from;
+    int to;
+    long weight;
+
+    Edge(int from, int to, long weight) {
+      this.from = from;
+      this.to = to;
+      this.weight = weight;
+    }
+  }
+
   static int[][] graph;// = {{0, 0, 3, 0, 8}, {0, 0, 0, 4, 0}, {3, 0, 0, 0, 6}, {0, 4, 0, 0, 0}, {8, 0, 6, 0, 0}};
   public static long[] marked;  //0 - never visited, 1 - visited, 2 - everything is discovered nearby.
   private static int NODES;
   private static int[] connected;
   public static int[] minfrom;
+  public static ArrayList<Edge> edges;
+
 
   public static void dfs_rec(int start, int counter) {
     marked[start] = 1;
@@ -93,37 +110,37 @@ public class DFS {
   }
 
   public static void dijkstra(int start) {
-    int[] done = new int[NODES];
+    boolean[] done = new boolean[NODES];
     long[] distance = new long[NODES];
     Arrays.fill(distance, Long.MAX_VALUE);
     distance[start] = 0;
-    Arrays.fill(done, 0);
     //int[] queue = new int[NODES * 10];
     int head = 0;
     int tail = 0;
-    done[start] = 1;
     int v = start;
     while (true) {
-      for (int i = 0; i < NODES; i++) {
-        if ((graph[i][v] != 0) && (done[i] != 1)) {
-          if (distance[i] > distance[v] + graph[i][v]) {
-            distance[i] = distance[v] + graph[i][v];
-          }
-        }
-      }
+
       long minlen = Long.MAX_VALUE;
       int minlen_id = -1;
       for (int j = 0; j < NODES; j++) {
-        if ((distance[j] < minlen) && (done[j] != 1)) {
+        if ((distance[j] < minlen) && (!done[j])) {
           minlen = distance[j];
           minlen_id = j;
         }
       }
-      if (minlen == Long.MAX_VALUE) break;
       if (minlen_id == -1) break;
-      minfrom[minlen_id] = v;
+
+      done[minlen_id] = true;
       v = minlen_id;
-      done[minlen_id] = 1;
+      for (int i = 0; i < NODES; i++) {
+        if ((graph[i][v] != 0) && (!done[i])) {
+          if (distance[i] > distance[v] + graph[i][v]) {
+            distance[i] = distance[v] + graph[i][v];
+            minfrom[i] = v;
+          }
+        }
+      }
+
     }
   }
 
@@ -185,6 +202,21 @@ public class DFS {
     return counter;
   }
 
+  public static void fordBellman(int start) {
+    long[] distance = new long[NODES];
+    Arrays.fill(distance, INF);
+    distance[start] = 0;
+    for (int i = 0; i < NODES; i++) {
+      for (Edge edge : edges) {
+        if (edge.from != INF) {
+          if (edge.weight + distance[edge.from] < distance[edge.to]) {
+            distance[edge.to] = edge.weight + distance[edge.from];
+            minfrom[edge.to] = edge.from;
+          }
+        }
+      }
+    }
+  }
 
   private static void solve() throws IOException {
     NODES = rInt();
@@ -194,18 +226,22 @@ public class DFS {
     minfrom = new int[NODES];
     Arrays.fill(minfrom, -1);
     final int n = rInt();
+    edges = new ArrayList<Edge>();
     for (int i = 0; i < n; i++) {
       int a = rInt();
       int b = rInt();
       int c = rInt();
       graph[a][b] = c;
       graph[b][a] = c;
+      edges.add(new Edge(a, b, c));
+      edges.add(new Edge(b, a, c));
     }
 
 //    System.out.println(n_connected());
 //    System.out.println(Arrays.toString(connected));
-    dijkstra(1);
-    printPath(1, 5);
+    fordBellman(0);
+    printPath(0, 2);
+    System.out.println(Arrays.toString(minfrom));
   }
 
   public static void main(String[] args) throws IOException {

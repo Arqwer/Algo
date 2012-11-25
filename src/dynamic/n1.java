@@ -5,9 +5,7 @@ import task2.Fib;
 import java.io.*;
 import java.util.Locale;
 
-/**
- * @date 30.03.12
- */
+
 public class n1 {
   private static void solve() throws IOException {
     int n = rInt();

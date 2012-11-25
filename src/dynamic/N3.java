@@ -24,9 +24,8 @@ public class N3 {
     if ((n <= 1) || (m <= 1)) return 1;
     if (waysArr[n][m] != 0) return waysArr[n][m];
     long ans = 0;
-    for (int i = 1; i < m; i++) {
-      ans += ways(n - 1, i);
-    }
+    ans = ways(n - 1, m) + ways(n, m - 1);
+    waysArr[n][m] = ans;
     return ans;
   }
 
