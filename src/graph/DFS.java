@@ -162,6 +162,7 @@ public class DFS {
     while (head != 0) {
       out.print(stack[head--] + "-->");
     }
+    out.print(stack[head]);
   }
 
   public static void dfs(int start, int counter) {
@@ -206,16 +207,19 @@ public class DFS {
     long[] distance = new long[NODES];
     Arrays.fill(distance, INF);
     distance[start] = 0;
-    for (int i = 0; i < NODES; i++) {
+    boolean relaxed;
+    do {
+      relaxed = false;
       for (Edge edge : edges) {
         if (edge.from != INF) {
           if (edge.weight + distance[edge.from] < distance[edge.to]) {
             distance[edge.to] = edge.weight + distance[edge.from];
             minfrom[edge.to] = edge.from;
+            relaxed = true;
           }
         }
       }
-    }
+    } while (relaxed);
   }
 
   private static void solve() throws IOException {
