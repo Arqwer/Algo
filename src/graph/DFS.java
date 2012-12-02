@@ -222,6 +222,44 @@ public class DFS {
     } while (relaxed);
   }
 
+  public static long[][] floyd() {
+    long[][] distance = new long[NODES][NODES];
+    for (int i = 0; i < NODES; i++) {
+      for (int j = 0; j < NODES; j++) {
+        distance[i][j] = graph[i][j] == 0 ? INF : graph[i][j];
+      }
+    }
+    for (int k = 0; k < NODES; k++) {
+      for (int i = 0; i < NODES; i++) {
+        for (int j = 0; j < NODES; j++) {
+          if (distance[i][k] != INF && distance[k][j] != INF) {
+            distance[i][j] = Math.min(
+                distance[i][j],
+                distance[i][k] + distance[k][j]
+            );
+          }
+        }
+      }
+    }
+    return distance;
+  }
+//
+//  public static List<Edge> prima(){
+//    long minLength = Long.MAX_VALUE;
+//    int curNode = 0;
+//    Edge curEdge;
+//    boolean addeed[] = new boolean[NODES];
+//
+//
+//    for (Edge edge:edges){
+//      if((edge.from == curNode)&&(edge.weight<minLength)){
+//        minLength = edge.weight;
+//        curEdge = edge;
+//      }
+//    }
+//    curNode = curEdge.to;
+//  }
+
   private static void solve() throws IOException {
     NODES = rInt();
     marked = new long[NODES];
@@ -231,6 +269,7 @@ public class DFS {
     Arrays.fill(minfrom, -1);
     final int n = rInt();
     edges = new ArrayList<Edge>();
+
     for (int i = 0; i < n; i++) {
       int a = rInt();
       int b = rInt();
@@ -238,12 +277,12 @@ public class DFS {
       graph[a][b] = c;
       graph[b][a] = c;
       edges.add(new Edge(a, b, c));
-      edges.add(new Edge(b, a, c));
+//      edges.add(new Edge(b, a, c));
     }
 
 //    System.out.println(n_connected());
 //    System.out.println(Arrays.toString(connected));
-    fordBellman(0);
+    final long[][] floyd = floyd();
     printPath(0, 2);
     System.out.println(Arrays.toString(minfrom));
   }
