@@ -61,7 +61,7 @@ public class Tree {
   }
 
   private static Node gcdCombine(Node a, Node b) {
-    int gcd = gcd(a.gcd, b.gcd);
+    int gcd = lcm(a.gcd, b.gcd);
     return new Node(gcd);
   }
 
@@ -82,7 +82,7 @@ public class Tree {
 
   private static Node tGcd(int v, int tl, int tr, int l, int r) {
     if (l > r) {
-      return new Node(0);
+      return new Node(1);
     }
     if ((l == tl) && (r == tr)) {
       return gcdArr[v];
