@@ -1,7 +1,6 @@
 package olymp.MIPT.B;
 
 import java.io.*;
-import java.util.Locale;
 
 
 /**
@@ -13,12 +12,12 @@ public class Main {
     return m >= n + 1 ? 2 * m * n + m - n : 2 * m * n + n - m + 1;
   }
 
-  private static void solve() throws IOException {
-    long[][] ans = new long[20][2];
+  private static void solve() throws IOException {  // time limit
+    long[][] ans = new long[20000][2];
     long x = rLong();  //TODO:rewrite
     int counter = 0;
-    for (int i = 1; i <= x / 3 + 1; i++) {
-      for (int j = 1; j <= x / 3 + 1; j++) {
+    for (long i = 1; i <= x / 3 + 1; i++) {
+      for (long j = (x + i) / (2 * i + 1); j <= x / 3 + 1; j++) {
         if (remainder(i, j) == x) {
           ans[counter][0] = i;
           ans[counter][1] = j;
@@ -28,20 +27,20 @@ public class Main {
       }
     }
     // System.out.println(Integer.MAX_VALUE);
-    System.out.println(counter);
+    out.println(counter);
     for (int i = 0; i < counter; i++) {
-      System.out.println(ans[i][0] + " " + ans[i][1]);
+      out.println(ans[i][0] + " " + ans[i][1]);
     }
   }
 
   public static void main(String[] args) throws IOException {
-    Locale.setDefault(Locale.US);
+
 
     BufferedReader br;
     try {
       final String fileName = "";
-      br = new BufferedReader(new FileReader(fileName + ".in"));
-      out = new PrintWriter(new FileWriter(fileName + ".out"));
+      br = new BufferedReader(new FileReader("input.txt"));
+      out = new PrintWriter(new FileWriter("output.txt"));
     } catch (Exception e) {
       br = new BufferedReader(new InputStreamReader(System.in));
       out = new PrintWriter(new OutputStreamWriter(System.out));
@@ -68,7 +67,8 @@ public class Main {
   }
 
   static long rLong() throws IOException {
-    return Long.parseLong(rNext());
+    st.nextToken();
+    return (long) st.nval;
   }
 
   static double rDouble() throws IOException {
