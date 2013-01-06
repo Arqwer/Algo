@@ -1,23 +1,24 @@
-package olymp.MIPT;
+package olymp.MIPT.A;
 
 import java.io.*;
-import java.util.Locale;
+
 
 /**
  * User: Roman
  * Date: 05.01.13
  */
-public class A {
+public class Main {
   private static void solve() throws IOException {
-    int n = rInt(), k = rInt();
-    int min, max;
-    min = (int) Math.ceil((float) n / k);
+    long n = rLong();
+    long k = rLong();
+    long min, max;
+    min = (long) Math.ceil((double) n / k);
     max = n - k + 1;
     out.print(min + " " + max);
   }
 
   public static void main(String[] args) throws IOException {
-    Locale.setDefault(Locale.US);
+
 
     BufferedReader br;
     try {
