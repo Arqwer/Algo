@@ -1,0 +1,149 @@
+package olymp.MIPT.F;
+
+import java.io.*;
+
+/**
+ * User: Roman
+ * Date: 07.01.13
+ */
+public class Main {
+  public static final char xDisallow[] = {'3', '4', '6', '7', '9'};
+  public static final char yDisallow[] = {'2', '5', '4', '6', '7', '9'};
+
+  public static int nMirrorY(char[] digits) {
+    int ans = 0;
+    if (digits[0] == '*') {
+      ans = 3;
+    }
+    for (int i = 1; i < digits.length; i++) {
+      if (digits[i] == '*') {
+        ans *= 4;
+        continue;
+      }
+      for (int j = 0; j < yDisallow.length; j++) {
+        if (digits[i] == yDisallow[j]) {
+          ans = 0;
+          break;
+        }
+      }
+    }
+    return ans;
+  }
+
+  public static int xValidator(char[] digits) {
+    for (int i = 0, j = digits.length - 1; i < j; i++, j--) {
+      if (i <= j) {
+        if (i == j) {
+          if ((digits[i] != '0') && (digits[i] != '1') && (digits[i] != '8')) {
+            return 0;
+          }
+          break;
+        }
+        for (int k = 0; k < xDisallow.length; k++) {
+          if ((digits[i] == xDisallow[k]) || (digits[j] == xDisallow[k])) {
+            return 0;
+          }
+        }
+        if (digits[i] == '2') {
+          if (digits[j] == '*') {
+            digits[j] = '5';
+          } else if (digits[j] != '5') {
+            return 0;
+          }
+        }
+        if (digits[j] == '2') {
+          if (digits[i] == '*') {
+            digits[i] = '5';
+          } else if (digits[i] != '5') {
+            return 0;
+          }
+        }
+        if (digits[i] == '5') {
+          if (digits[j] == '*') {
+            digits[j] = '2';
+          } else if (digits[j] != '2') {
+            return 0;
+          }
+        }
+        if (digits[j] == '5') {
+          if (digits[i] == '*') {
+            digits[i] = '2';
+          } else if (digits[i] != '2') {
+            return 0;
+          }
+        }
+      }
+    }
+    return 1;
+  }
+
+  public static int nMirrorX(char[] digits) {
+    int ans = 1;
+    if (xValidator(digits) == 0) {
+      return 0;
+    }
+    if (digits[0] == '*') ans *= 4;
+    for (int i = 1; i < digits.length / 2; i++) {
+      if (digits[i] == '*') {
+        ans *= 5;
+      }
+    }
+    if (digits.length % 2 == 1) {
+      if (digits[digits.length / 2 + 1] == '*') {
+        ans *= 3;
+      }
+    }
+    return ans;
+  }
+
+  private static void solve() throws IOException {
+    int len = rInt();
+    final char[] digits = rNext().toCharArray();
+
+//    long ans;
+//    ans = nMirrorY(digits) + nMirrorX(digits); //!! nMirrorX modifies array, so it should be the last operation.
+//    out.println(ans);
+  }
+
+  public static void main(String[] args) throws IOException {
+
+
+    BufferedReader br;
+    try {
+      final String fileName = "";
+      br = new BufferedReader(new FileReader("input.txt"));
+      out = new PrintWriter(new FileWriter("output.txt"));
+    } catch (Exception e) {
+      br = new BufferedReader(new InputStreamReader(System.in));
+      out = new PrintWriter(new OutputStreamWriter(System.out));
+    }
+    st = new StreamTokenizer(br);
+
+    solve();
+
+    br.close();
+    out.close();
+  }
+
+  private static StreamTokenizer st;
+  private static PrintWriter out;
+
+  static String rNext() throws IOException {
+    st.nextToken();
+    return st.sval;
+  }
+
+  static int rInt() throws IOException {
+    st.nextToken();
+    return (int) st.nval;
+  }
+
+  static long rLong() throws IOException {
+    st.nextToken();
+    return (long) st.nval;
+  }
+
+  static double rDouble() throws IOException {
+    return Double.parseDouble(rNext());
+  }
+}
