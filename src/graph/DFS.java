@@ -73,7 +73,7 @@ public class DFS {
 //    connected[start]=counter;
 //    do {
 //      for (int i = 0; i < NODES; i++) {
-//        if ((graph[start][i] != 0) && (marked[i] == 0)) {
+//        if ((distance[start][i] != 0) && (marked[i] == 0)) {
 //          queue.offer(i);
 //          connected[i]=counter;
 //          marked[i] = 1;

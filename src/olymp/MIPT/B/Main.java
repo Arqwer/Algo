@@ -16,17 +16,33 @@ public class Main {
     long[][] ans = new long[20000][2];
     long x = rLong();  //TODO:rewrite
     int counter = 0;
-    for (long i = 1; i <= x / 3 + 1; i++) {
-      for (long j = (x + i) / (2 * i + 1); j <= x / 3 + 1; j++) {
-        if (remainder(i, j) == x) {
-          ans[counter][0] = i;
-          ans[counter][1] = j;
-          counter++;
-          break;
-        }
+    long n, m;
+//    for (long i = 1; i <= x / 3 + 1; i++) {
+//      for (long j = (x + i) / (2 * i + 1); j <= x / 3 + 1; j++) {
+//        if (remainder(i, j) == x) {
+//          ans[counter][0] = i;
+//          ans[counter][1] = j;
+//          counter++;
+//          break;
+//        }
+//      }
+//    }
+    for (n = 1; n < (m = (x + n) / (2 * n + 1)); n++) {
+      if (remainder(n, m) == x) {
+        ans[counter][0] = n;
+        ans[counter][1] = m;
+        ++counter;
       }
     }
-    // System.out.println(Integer.MAX_VALUE);
+    for (m = 1; m <= (n = (m + x - 1) / (2 * m + 1)); m++) {
+
+      if (remainder(n, m) == x) {
+        ans[counter][0] = n;
+        ans[counter][1] = m;
+        ++counter;
+      }
+    }
+
     out.println(counter);
     for (int i = 0; i < counter; i++) {
       out.println(ans[i][0] + " " + ans[i][1]);

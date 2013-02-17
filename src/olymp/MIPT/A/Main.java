@@ -51,7 +51,8 @@ public class Main {
   }
 
   static long rLong() throws IOException {
-    return Long.parseLong(rNext());
+    st.nextToken();
+    return (long) st.nval;
   }
 
   static double rDouble() throws IOException {
